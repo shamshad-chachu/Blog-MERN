@@ -34,6 +34,8 @@ const StoreContextProvider = (props) => {
 const [blogSubmiting, setBlogSubmiting] = useState(false);
 const [blogError, setBlogError] = useState(null);
 
+
+const URL = "https://blog-mern-5p0e.onrender.com"
 //------------------------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------------------------//
 //------------------------------------------------------------------------------------------------------//
@@ -52,7 +54,7 @@ const [blogError, setBlogError] = useState(null);
         setUserBlogFetching(true);
         setUserBlogError(null);
 
-        let url = `http://localhost:5000/api/v1/user/blog`;
+        let url = `${URL}/api/v1/user/blog`||`http://localhost:5000/api/v1/user/blog`;
         
         const data = await fetch(url, {
             method: "GET", 
@@ -94,7 +96,7 @@ const [blogError, setBlogError] = useState(null);
         setBlogSubmiting(true);
         setBlogError(null);
 
-        let url = `http://localhost:5000/api/v1/user/blog`;
+        let url = `${URL}/api/v1/user/blog`||`http://localhost:5000/api/v1/user/blog`;
         
         const response = await fetch(url, {
             method: "POST", 
@@ -134,7 +136,7 @@ const getBlogById = useCallback(async (id) => {
     setBlogError(null); // Clear previous error
 
     try {
-        let url = `http://localhost:5000/api/v1/user/blog/${id}`;
+        let url = `${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
         
         const response = await fetch(url, {
             method: "GET", 
@@ -172,7 +174,7 @@ const UpdateBlog =useCallback(async (id, formData) => {
         setBlogSubmiting(true);
         setBlogError(null);
 
-        let url = `http://localhost:5000/api/v1/user/blog/${id}`;
+        let url =`${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
         
         const response = await fetch(url, {
             method: "PATCH", 
@@ -214,7 +216,7 @@ const DeleteBlog = useCallback(async (id) => {
         setBlogSubmiting(true); // Reusing submiting state for operation tracking
         setBlogError(null);
 
-        let url = `http://localhost:5000/api/v1/user/blog/${id}`;
+        let url =`${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
         
         const response = await fetch(url, {
             method: "DELETE",
@@ -255,7 +257,9 @@ const DeleteBlog = useCallback(async (id) => {
             setFetching(true);
             setError(null);
 
-            let url = `http://localhost:5000/api/v1/blog?category=${currentCategory}&page=${currentPage}`;
+            let url = `${URL}/api/v1/blog?category=${currentCategory}&page=${currentPage}`
+            ||
+             `http://localhost:5000/api/v1/blog?category=${currentCategory}&page=${currentPage}`;
             
             if (currentSearchQuery) {
                 url += `&search=${currentSearchQuery}`;
@@ -287,7 +291,9 @@ const DeleteBlog = useCallback(async (id) => {
             setLatestFetching(true); 
             setLatestError(null);
 
-            let url = `http://localhost:5000/api/v1/blog/latest?category=${currentCategory}`;
+            let url = `${URL}/api/v1/blog/latest?category=${currentCategory}`
+                        ||
+                     `http://localhost:5000/api/v1/blog/latest?category=${currentCategory}`;
             const data = await fetch(url);
             
             if (!data.ok) {
@@ -311,7 +317,7 @@ const DeleteBlog = useCallback(async (id) => {
 
    const Login = async (formData) => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/user/login", {
+        const response = await fetch(`${URL}/api/v1/user/login`||"http://localhost:5000/api/v1/user/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -343,7 +349,7 @@ const DeleteBlog = useCallback(async (id) => {
 
 const Register = async (formData) => {
     try {
-        const response = await fetch("http://localhost:5000/api/v1/user/register", { 
+        const response = await fetch(`${URL}/api/v1/user/register`||"http://localhost:5000/api/v1/user/register", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
