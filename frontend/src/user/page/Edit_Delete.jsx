@@ -48,8 +48,8 @@ const Edit_Delete = () => {
   };
 
   return (
-    <div className="bg-neutral-100 min-h-screen px-5 py-8 relative">
-      <div className=" grid grid-cols-3 gap-4">
+    <div className="bg-neutral-100 dark:bg-neutral-900 min-h-screen px-5 py-8 relative">
+      <div className=" grid grid-cols-1 md:grid-cols-3 gap-4">
         {UserBlogFetching && <BlogListSkeleton count={8} />}
 
         {UserBlogError && !UserBlogFetching && (

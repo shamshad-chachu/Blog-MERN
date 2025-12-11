@@ -3,7 +3,7 @@ import Blog from "../components/Blog";
 import BlogListSkeleton from "../components/BlogSkeleton"; 
 import { StoreContext } from "../Context/StoreContext";
 import { Search } from "lucide-react";
-
+import { motion } from "motion/react";
 const Blogs = () => {
     const [showFilterMenue, setShowFilterMenue] = useState(false);
     const [showBlog, setShowBlog] = useState(false);
@@ -72,12 +72,32 @@ const Blogs = () => {
     return (
         <div className="bg-neutral-100 dark:bg-neutral-900 p-10 relative">
             <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-10">
-                <h1 className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                <motion.h1 
+                initial={{
+                    opacity:0,
+                    x:-10
+                }}
+                whileInView={{
+                    opacity:1,
+                    x:0
+                }}
+                transition={{duration:0.3,ease:"easeIn"}}
+                className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
                     Blogs
-                </h1>
+                </motion.h1>
                 {/* Search Input Section */}
                 <div className="w-full flex items-center gap-2 justify-center">
-                    <div className="flex items-center gap-3 ring-1 ring-neutral-300 dark:ring-neutral-600 dark:text-neutral-100 dark:bg-neutral-800 rounded-lg md:w-[30%] mt-4 ps-5 py-2 text-sm">
+                    <motion.div
+                    initial={{
+                        opacity:0,
+                        scale:0.7
+                    }}
+                    whileInView={{
+                        opacity:1,
+                        scale:1
+                    }}
+                    transition={{duration:0.3,ease:"easeInOut"}}
+                    className="flex items-center gap-3 ring-1 ring-neutral-300 dark:ring-neutral-600 dark:text-neutral-100 dark:bg-neutral-800 rounded-lg md:w-[30%] mt-4 ps-5 py-2 text-sm">
                         <i><Search size={18} /></i>
                         <input
                             type="text"
@@ -91,13 +111,22 @@ const Blogs = () => {
                             }}
                             className="w-full border-none outline-none dark:text-neutral-50"
                         />
-                    </div>
-                    <button 
+                    </motion.div>
+                    <motion.button 
+                    initial={{
+                        opacity:0,
+                        scale:0.8
+                    }}
+                    whileInView={{
+                        opacity:1,
+                        scale:1
+                    }}
+                    transition={{duration:0.3,ease:"easeInOut"}}
                         className="bg-blue-700 text-neutral-200 mt-4 px-6 py-px rounded-full"
                         onClick={handleSearch}
                     >
                         Search
-                    </button>
+                    </motion.button>
                 </div>
             </div>
 
@@ -145,8 +174,19 @@ const Blogs = () => {
                     
                     {fetching && <BlogListSkeleton count ={4} />}
 
-                    {!fetching && !error && blogs && blogs.map((blog) => (
-                        <div
+                    {!fetching && !error && blogs && blogs.map((blog,idx) => (
+                        <motion.div
+                        initial={{
+                            opacity:0,
+                            filter:"blur(10px)",
+                            width:"50%"
+                        }}
+                        whileInView={{
+                            opacity:1,
+                            filter:"blur(0px)",
+                            width:"100%"
+                        }}
+                        transition={{duration:0.3,delay:idx*0.1,ease:"easeIn"}}
                             key={blog._id}
                             className="flex flex-col gap-3 justify-start md:shadow-md px-2 py-4 dark:bg-neutral-800 cursor-pointer"
                             onClick={() => handleBlogClick(blog)}
@@ -160,7 +200,7 @@ const Blogs = () => {
                             <p className="text-blue-900 font-semibold text-md dark:text-blue-400">
                                 Read More -I
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
 
                     {/* Blog Detail Modal */}

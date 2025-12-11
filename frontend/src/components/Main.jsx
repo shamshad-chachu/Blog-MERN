@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../Context/StoreContext";
 import Blog from "./Blog";
 import BlogListSkeleton from "./BlogSkeleton";
-
+import { motion } from "motion/react";
 
 
 const Main = () => {
@@ -54,7 +54,9 @@ const Main = () => {
         <div className="py-10">
             <div className="mx-auto w-[95%] flex flex-col md:flex-row gap-10 md:gap-20">
                 {/* section 1 */}
-                <div className="flex flex-col gap-10 md:gap-5 md:w-[60%]">
+                <div
+                
+                className="flex flex-col gap-10 md:gap-5 md:w-[60%]">
                     <h2 className="font-bold text-2xl text-neutral-900 dark:text-neutral-100">
                         Latest Posts ({latestCategory})
                     </h2>
@@ -71,11 +73,22 @@ const Main = () => {
                     )}
 
                     {!latestFetching && !latestError && latestBlogs && latestBlogs.length > 0 ? (
-                        latestBlogs.map((blog) => (
-                            <div
-                             key={blog._id}
+                        latestBlogs.map((blog,idx) => (
+                            <motion.div
+                            initial={{
+                                opacity:0,
+                                filter:"blur(10px)",
+                                width:"50%"
+                            }}
+                            whileInView={{
+                                opacity:1,
+                                filter:"blur(0px)",
+                                width:"100%"
+                            }}
+                            transition={{duration:0.3,delay:idx*0.1,ease:"easeIn"}}
+                            key={blog._id}
                              onClick={() => handleBlogClick(blog)}
-                             className="flex flex-col gap-3 justify-start shadow-md dark:bg-neutral-800 px-2 py-4">
+                             className="flex flex-col gap-3 justify-start shadow-md dark:bg-neutral-800 px-2 py-4 overflow-hidden">
                                 <h4 className="text-lg font-bold text-neutral-800 dark:text-neutral-200">{blog.title}</h4>
                                 <p className="text-neutral-800 dark:text-neutral-200 text-md">
                                     {blog.des.substring(0, 200)}... 
@@ -83,7 +96,7 @@ const Main = () => {
                                 <p className="text-blue-700 dark:text-blue-400 font-semibold text-md">
                                     Read More
                                 </p>
-                            </div>
+                            </motion.div>
                         ))
                     ) : (
                         !latestFetching && !latestError && <p className="text-lg text-neutral-500 dark:text-neutral-400">No blogs exist for this category.</p>

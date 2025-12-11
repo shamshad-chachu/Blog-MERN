@@ -55,6 +55,9 @@ const URL = "https://blog-mern-5p0e.onrender.com"
         setUserBlogError(null);
 
         let url = `${URL}/api/v1/user/blog`||`http://localhost:5000/api/v1/user/blog`;
+
+         //for dev pupose
+        // let url =  `http://localhost:5000/api/v1/user/blog`
         
         const data = await fetch(url, {
             method: "GET", 
@@ -97,6 +100,9 @@ const URL = "https://blog-mern-5p0e.onrender.com"
         setBlogError(null);
 
         let url = `${URL}/api/v1/user/blog`||`http://localhost:5000/api/v1/user/blog`;
+
+         //for dev pupose
+        // let url = `http://localhost:5000/api/v1/user/blog`
         
         const response = await fetch(url, {
             method: "POST", 
@@ -137,6 +143,9 @@ const getBlogById = useCallback(async (id) => {
 
     try {
         let url = `${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
+
+         //for dev pupose
+        // let url = `http://localhost:5000/api/v1/user/blog/${id}`
         
         const response = await fetch(url, {
             method: "GET", 
@@ -175,6 +184,9 @@ const UpdateBlog =useCallback(async (id, formData) => {
         setBlogError(null);
 
         let url =`${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
+
+         //for dev pupose
+        // let url = `http://localhost:5000/api/v1/user/blog/${id}`
         
         const response = await fetch(url, {
             method: "PATCH", 
@@ -217,6 +229,9 @@ const DeleteBlog = useCallback(async (id) => {
         setBlogError(null);
 
         let url =`${URL}/api/v1/user/blog/${id}` || `http://localhost:5000/api/v1/user/blog/${id}`;
+
+         //for dev pupose
+        // let url = `http://localhost:5000/api/v1/user/blog/${id}`
         
         const response = await fetch(url, {
             method: "DELETE",
@@ -260,6 +275,9 @@ const DeleteBlog = useCallback(async (id) => {
             let url = `${URL}/api/v1/blog?category=${currentCategory}&page=${currentPage}`
             ||
              `http://localhost:5000/api/v1/blog?category=${currentCategory}&page=${currentPage}`;
+
+             //for dev pupose
+            //  let url = `http://localhost:5000/api/v1/blog?category=${currentCategory}&page=${currentPage}`
             
             if (currentSearchQuery) {
                 url += `&search=${currentSearchQuery}`;
@@ -294,6 +312,9 @@ const DeleteBlog = useCallback(async (id) => {
             let url = `${URL}/api/v1/blog/latest?category=${currentCategory}`
                         ||
                      `http://localhost:5000/api/v1/blog/latest?category=${currentCategory}`;
+
+             //for dev pupose
+            // let url = `http://localhost:5000/api/v1/blog/latest?category=${currentCategory}`
             const data = await fetch(url);
             
             if (!data.ok) {
@@ -317,7 +338,12 @@ const DeleteBlog = useCallback(async (id) => {
 
    const Login = async (formData) => {
     try {
-        const response = await fetch(`${URL}/api/v1/user/login`||"http://localhost:5000/api/v1/user/login", {
+        const response =
+         await fetch(`${URL}/api/v1/user/login`||"http://localhost:5000/api/v1/user/login", 
+
+         //for dev pupose
+        //  await fetch("http://localhost:5000/api/v1/user/login", 
+            {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -349,7 +375,14 @@ const DeleteBlog = useCallback(async (id) => {
 
 const Register = async (formData) => {
     try {
-        const response = await fetch(`${URL}/api/v1/user/register`||"http://localhost:5000/api/v1/user/register", { 
+        const response =
+         await fetch(`${URL}/api/v1/user/register`||"http://localhost:5000/api/v1/user/register",
+            
+            //for dev pupose
+        //  await fetch("http://localhost:5000/api/v1/user/register", 
+
+            
+            { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

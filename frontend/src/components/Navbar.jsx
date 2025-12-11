@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "../theme/ThemeToggle";
 import { StoreContext } from "../Context/StoreContext";
-import { CircleUser } from "lucide-react";
+import { CircleUser, TextAlignJustify } from "lucide-react";
 
 const Navbar = () => {
   const [showMobileMenue, setShowMobileMenue] = useState(false);
@@ -74,7 +74,7 @@ const Navbar = () => {
             setShowMobileMenue(!showMobileMenue);
           }}
         >
-          Icon
+          <TextAlignJustify className="dark:text-neutral-100" />
         </div>
       </div>
       {/* Mobile Menu */}
@@ -90,8 +90,8 @@ const Navbar = () => {
             <ThemeToggle />
             {isLogin && (
               <>
-                <Link className={navItemClasses}>User Blogs</Link>
-                <Link className={navItemClasses}>Edit/Del Blogs</Link>
+                <Link to='/user/Blogs' className={navItemClasses}>User Blogs</Link>
+                <Link to='/user/Blogs/Update' className={navItemClasses}>Edit/Del Blogs</Link>
               </>
             )}
             <div
